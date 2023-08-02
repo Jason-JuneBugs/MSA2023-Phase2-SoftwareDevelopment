@@ -1,4 +1,4 @@
-const db = require("./dbConnection")
+const db = require("../dbConnection")
 
 module.exports = {
 //   getAllGames: async () => {
@@ -18,8 +18,12 @@ module.exports = {
 //   },
   getAllLaunches: async () => {
     try {
-      // TODO: Update table name
-      const result = await db.query('SELECT * FROM launches');
+      const result = await db.query(`
+        SELECT l.flightNumber, l.launchDate,l.mission,l.rocket,p.keplerName AS Destination
+         FROM launches AS l
+         JOIN planets AS p ON l.target_id=p.planet_id
+         ORDER BY l.id;
+       `);
       return result.rows;
     } catch (error) {
       throw Error(error);
