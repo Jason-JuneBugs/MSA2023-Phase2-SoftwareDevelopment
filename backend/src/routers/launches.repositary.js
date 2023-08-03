@@ -33,7 +33,7 @@ module.exports = {
     try {
       const result = await db.query(
         `
-        SELECT l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,p.keplerName AS Destination
+        SELECT l.id,l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,p.keplerName AS Destination
         FROM launches AS l
         JOIN planets AS p ON l.target_id=p.planet_id
         WHERE l.id=$1
@@ -50,7 +50,7 @@ module.exports = {
   getAllPastLaunches: async () => {
     try {
       const result = await db.query(`
-        SELECT l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,p.keplerName AS Destination
+        SELECTl.id,l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,p.keplerName AS Destination
          FROM launches AS l
          JOIN planets AS p ON l.target_id=p.planet_id
          WHERE l.upcoming=FALSE
@@ -65,7 +65,7 @@ module.exports = {
   getAllUpcomingLaunches: async () => {
     try {
       const result = await db.query(`
-        SELECT l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,p.keplerName AS Destination
+        SELECT l.id,l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,p.keplerName AS Destination
          FROM launches AS l
          JOIN planets AS p ON l.target_id=p.planet_id
          WHERE l.upcoming=TRUE
@@ -101,7 +101,7 @@ module.exports = {
       const result = await db.query(
         `
       DELETE FROM launches AS l
-      WHERE l.flightnumber=$1
+      WHERE l.id=$1
       RETURNING *;
       `,
         [id]
