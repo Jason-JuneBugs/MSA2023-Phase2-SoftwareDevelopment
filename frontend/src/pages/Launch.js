@@ -1,15 +1,16 @@
-import { useMemo } from "react";
+import { useMemo} from "react";
 import { Appear, Button, Loading, Paragraph } from "arwes";
 import Clickable from "../components/Clickable";
 
 const Launch = props => {
   const selectorBody = useMemo(() => {
     return props.planets?.map(planet => 
-      <option value={planet.keplerName} key={planet.keplerName}>{planet.keplerName}</option>
+      <option value={planet.keplername} key={planet.planet_id}>{planet.keplername}</option>
     );
   }, [props.planets]);
 
   const today = new Date().toISOString().split("T")[0];
+  // console.log("opertions are",selectorBody)
 
   return <Appear id="launch" animate show={props.entered}>
     <Paragraph>Schedule a mission launch for interstellar travel to one of the Kepler Exoplanets.</Paragraph>

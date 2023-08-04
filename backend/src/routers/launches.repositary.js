@@ -1,21 +1,7 @@
 const db = require("../dbConnection")
 
 module.exports = {
-//   getAllGames: async () => {
-//     try {
-//       // TODO: Update table name
-//       const result = await db.query(`
-//         SELECT g.id, g.title, g.artwork, g.description, g.genres, g.age_rating, d.name AS developer, d.id AS developer_id, g.year, p.name AS platform, p.id AS platform_id, g.status
-//         FROM games AS g
-//         JOIN developers AS d ON g.developer_id=d.id
-//         JOIN platforms AS p ON g.platform_id=p.id
-//         ORDER BY id;
-//       `);
-//       return result.rows;
-//     } catch (error) {
-//       throw Error(error);
-//     }
-//   },
+ 
     getAllLaunches: async () => {
       try {
         const result = await db.query(`

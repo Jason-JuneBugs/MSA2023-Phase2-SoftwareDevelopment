@@ -1,13 +1,12 @@
 const launchesRouter=require('./routers/launches.router')
+const planetsRouter=require('./routers/planets.router')
 
 
 
 const express = require("express");
 const app = express();
 const cors = require("cors");
-// const questionRouter = require("./questions/question.router");
-// const answerRouter = require("./answers/answer.router");
-// const errorHandlerMiddleware = require("./middleware/errorHandlerMiddleware");
+ 
 
 //middleware
 app.use(cors());
@@ -16,8 +15,7 @@ app.use(express.json());
 
 //routes
 app.use("/api/launches", launchesRouter);
-
-// app.use("/api/planets", planetsRouter);
+app.use("/api/planets", planetsRouter);
 
 // AWS Copilot requires a healthcheck endpoint. It calls this endpoint
 // every 2 minutes to check the server is still running. If this endpoint fails
