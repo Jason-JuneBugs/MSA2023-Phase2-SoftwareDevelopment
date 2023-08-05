@@ -5,7 +5,7 @@ module.exports = {
     getAllLaunches: async () => {
       try {
         const result = await db.query(`
-          SELECT l.id,l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,p.keplerName AS Destination
+          SELECT l.id,l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,l.customers,l.success,p.keplerName AS Destination
           FROM launches AS l
           JOIN planets AS p ON l.target_id=p.planet_id
           ORDER BY l.id;
@@ -19,7 +19,7 @@ module.exports = {
     try {
       const result = await db.query(
         `
-        SELECT l.id,l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,p.keplerName AS Destination
+        SELECT l.id,l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,l.customers,l.success,p.keplerName AS Destination
         FROM launches AS l
         JOIN planets AS p ON l.target_id=p.planet_id
         WHERE l.id=$1
@@ -36,7 +36,7 @@ module.exports = {
   getAllPastLaunches: async () => {
     try {
       const result = await db.query(`
-        SELECTl.id,l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,p.keplerName AS Destination
+      SELECT l.id,l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,l.customers,l.success,p.keplerName AS Destination
          FROM launches AS l
          JOIN planets AS p ON l.target_id=p.planet_id
          WHERE l.upcoming=FALSE
@@ -51,7 +51,7 @@ module.exports = {
   getAllUpcomingLaunches: async () => {
     try {
       const result = await db.query(`
-        SELECT l.id,l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,p.keplerName AS Destination
+      SELECT l.id,l.flightNumber, l.launchDate,l.mission,l.rocket,l.upcoming,l.customers,l.success,p.keplerName AS Destination
          FROM launches AS l
          JOIN planets AS p ON l.target_id=p.planet_id
          WHERE l.upcoming=TRUE

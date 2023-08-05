@@ -18,6 +18,7 @@ function useLaunches(onSuccessSound, onAbortSound, onFailureSound) {
 
   useEffect(() => {
     getLaunches();
+    console.log('launches are')
   }, [getLaunches]);
 
   const submitLaunch = useCallback(async (e) => {
