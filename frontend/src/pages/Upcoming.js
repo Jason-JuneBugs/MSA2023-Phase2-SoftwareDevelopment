@@ -1,4 +1,4 @@
-import { useMemo,useState } from "react";
+import { useMemo} from "react";
 import { 
   withStyles,
   Appear,
@@ -46,10 +46,7 @@ const Upcoming = props => {
       });
   }, [launches, abortLaunch, classes.link]);
  
-  
    
-  
-
   return <Appear id="upcoming" animate show={entered}>
     <Paragraph>Upcoming missions including both SpaceX launches and newly scheduled Zero to Mastery rockets.</Paragraph>
     <Words animate>Warning! Clicking on the ✖ aborts the mission.</Words>

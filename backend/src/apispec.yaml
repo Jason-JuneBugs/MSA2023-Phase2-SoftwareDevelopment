@@ -1,0 +1,202 @@
+openapi: 3.0.2
+info:
+  title: NASA Mission Control API
+  version: '1.0'
+  contact:
+    name: Jason Zhong
+    email: jasonzhong@developersinstitute.co.nz
+  description: This API allows users to access the launches and planets data
+servers:
+  - url: 'http://localhost:5001/api'
+    description: Development server
+paths:
+  /planets:
+      get:
+        description: Get a list of planets
+        operationId: get-planets
+        tags:
+          - For planets
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    keplerName:
+                      type: text
+                    planet_id:
+                      type: integer
+          '500':
+            description: server error
+        summary: ''
+  /launches:
+    get:
+      description: Get a list of historical launches
+      operationId: get-launches
+      tags:
+        - For a collection of launchess
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  flightNumber:
+                    type: integer
+                  launchDate:
+                    type: date
+                  mission:
+                    type: string
+                  rocket:
+                    type: string
+                  upcoming:
+                    type: boolean
+                  customers:
+                    type: array
+                  success:
+                    type: boolean
+                  Destination:
+                    type: string
+                  
+        '500':
+          description: server error
+      summary: ''
+    post:
+      description: add a new launch to the launches list
+      operationId: add-launches
+      tags:
+        - For a collection of launches
+      responses:
+        '201':
+          description: launch added
+        '400':
+          description: bad request
+        '500':
+          description: server error
+      requestBody:
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  flightNumber:
+                    type: integer
+                  launchDate:
+                    type: date
+                  mission:
+                    type: string
+                  rocket:
+                    type: string
+                  upcoming:
+                    type: boolean
+                  customers:
+                    type: array
+                  success:
+                    type: boolean
+                  target_id:
+                    type: integer
+  '/launches/{id}':
+    parameters:
+      - schema:
+          type: integer
+        name: id
+        in: path
+        required: true
+    get:
+      description: Get a launch from the list
+      operationId: get-a-launch-id
+      tags:
+        - For a single launch
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  flightNumber:
+                    type: integer
+                  launchDate:
+                    type: date
+                  mission:
+                    type: string
+                  rocket:
+                    type: string
+                  upcoming:
+                    type: boolean
+                  customers:
+                    type: array
+                  success:
+                    type: boolean
+                  Destination:
+                    type: string
+        '404':
+          description: not found
+        '500':
+          description: server error
+    delete:
+      description: delete a launch
+      operationId: delete-a-launch-id
+      tags:
+        - For a single launch
+      responses:
+        '200':
+          description: launch deleted
+        '400':
+          description: bad request
+        '404':
+          description: not found
+        '500':
+          description: server error
+    patch:
+      description: update a launch
+      operationId: update-a-launch-id
+      tags:
+        - For a single launch
+      responses:
+        '200':
+          description: launchs updated
+        '400':
+          description: bad request
+        '404':
+          description: not found
+        '500':
+          description: server error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                properties:
+                  id:
+                    type: integer
+                  flightNumber:
+                    type: integer
+                  launchDate:
+                    type: date
+                  mission:
+                    type: string
+                  rocket:
+                    type: string
+                  upcoming:
+                    type: boolean
+                  customers:
+                    type: array
+                  success:
+                    type: boolean
+                  Destination:
+                    type: string
+tags:
+  - name: For planets
+  - name: For a collection of launches
+  - name: For a single launch

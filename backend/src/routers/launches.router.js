@@ -1,27 +1,14 @@
 const express = require("express");
-const {getAllLaunches,getAllPastLaunches,getAllUpcomingLaunches,getLaunchById, createLaunches,deleteLaunchById,updateLaunchById} = require("./launches.repositary");
+const {
+  getAllLaunches,
+  getAllPastLaunches,
+  getAllUpcomingLaunches,
+  getLaunchById,
+  createLaunches,
+  deleteLaunchById,
+  updateLaunchById,
+} = require("./launches.repositary");
 const router = express.Router();
-// const { errors } = require("celebrate");
-// const {
-//   idValidation,
-//   bodyValidation,
-//   bodyPatchValidation,
-//   formatGenres,
-// } = require("./library.utils");
-
-// TODO: Add all routes
-// router.get("/", async (req, res, next) => {
-//   try {
-//     let allGames = await getAllGames();
-//     allGames = allGames.map((game) => ({
-//       ...game,
-//       genres: formatGenres(game.genres),
-//     }));
-//     return res.status(200).send(allGames);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
 
 router.get("/", async (req, res, next) => {
   try {
@@ -30,7 +17,7 @@ router.get("/", async (req, res, next) => {
     const safePage = Boolean(parseInt(page)) ? parseInt(page) : 1;
     // let allLaunches = await getAllPastLaunches();
     // let allLaunches = await getAllUpcomingLaunches();
-    let allLaunches = await getAllLaunches()
+    let allLaunches = await getAllLaunches();
 
     return res.status(200).send(allLaunches);
   } catch (err) {
@@ -49,7 +36,6 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-
 router.post("/", async (req, res, next) => {
   try {
     let newLaunch = await createLaunches(req.body);
@@ -59,7 +45,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.delete("/:id",  async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const numberOfDeletedLaunches = await deleteLaunchById(id);
@@ -70,18 +56,17 @@ router.delete("/:id",  async (req, res) => {
   }
 });
 
-router.patch("/:id",  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      let updatedLaunch = await updateLaunchById(id, req.body);
-      if (!updatedLaunch) throw new Error(404);
-      
-      res.status(200).send(updatedLaunch);
-    } catch (err) {
-      next(err);
-    }
+router.patch("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    let updatedLaunch = await updateLaunchById(id, req.body);
+    if (!updatedLaunch) throw new Error(404);
+
+    res.status(200).send(updatedLaunch);
+  } catch (err) {
+    next(err);
   }
-);
+});
 
 // router.post("/", bodyValidation, async (req, res, next) => {
 //   try {

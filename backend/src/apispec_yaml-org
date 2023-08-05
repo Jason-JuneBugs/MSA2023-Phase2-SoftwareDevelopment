@@ -1,0 +1,223 @@
+openapi: 3.0.2
+info:
+  title: Library API
+  version: '1.0'
+  contact:
+    name: My name
+    email: email@example.com
+  description: This API allows users to access the launch and planet data
+servers:
+  - url: 'http://localhost:5001/api'
+    description: Development server
+paths:
+  /launches:
+    get:
+      description: Get a list of historical launches
+      operationId: get-launches
+      tags:
+        - For launches
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  flightNumber:
+                    type: integer
+                  launchDate:
+                    type: date
+                  mission:
+                    type: string
+                  rocket:
+                    type: string
+                  upcoming:
+                    type: boolean
+                  customers:
+                    type: array
+                  success:
+                    type: boolean
+                  Destination:
+                    type: string
+                  
+        '500':
+          description: server error
+      summary: ''
+    post:
+      description: add a new launch to the launches list
+      operationId: add-launches
+      tags:
+        - For launches
+      responses:
+        '201':
+          description: launch added
+        '400':
+          description: bad request
+        '500':
+          description: server error
+      requestBody:
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  flightNumber:
+                    type: integer
+                  launchDate:
+                    type: date
+                  mission:
+                    type: string
+                  rocket:
+                    type: string
+                  upcoming:
+                    type: boolean
+                  customers:
+                    type: array
+                  success:
+                    type: boolean
+                  target_id:
+                    type: integer
+paths:
+  /launches/{id}:
+    parameters:
+      - schema:
+          type: integer
+        name: id
+        in: path
+        required: true
+    get:
+      description: Get a launch from the list
+      operationId: get-a-launch-id
+      tags:
+        - For a single launch
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  flightNumber:
+                    type: integer
+                  launchDate:
+                    type: date
+                  mission:
+                    type: string
+                  rocket:
+                    type: string
+                  upcoming:
+                    type: boolean
+                  customers:
+                    type: array
+                  success:
+                    type: boolean
+                  Destination:
+                    type: string
+        '404':
+          description: not found
+        '500':
+          description: server error
+#  '/launches/{id}':
+#     parameters:
+#       - schema:
+#           type: integer
+#         name: id
+#         in: path
+#         required: true
+#     get:
+#       description: Get a launch from the list
+#       operationId: get-a-launch-id
+#       tags:
+#         - For a single launch
+#       responses:
+#         '200':
+#           description: OK
+#           content:
+#             application/json:
+#               schema:
+#                 type: object
+#                 properties:
+#                   id:
+#                     type: integer
+#                   flightNumber:
+#                     type: integer
+#                   launchDate:
+#                     type: date
+#                   mission:
+#                     type: string
+#                   rocket:
+#                     type: string
+#                   upcoming:
+#                     type: boolean
+#                   customers:
+#                     type: array
+#                   success:
+#                     type: boolean
+#                   Destination:
+#                     type: string
+#         '404':
+#           description: not found
+#         '500':
+#           description: server error
+#     delete:
+#       description: delete a launch
+#       operationId: delete-a-launch-id
+#       tags:
+#         - For a single launch
+#       responses:
+#         '200':
+#           description: launch deleted
+#         '400':
+#           description: bad request
+#         '404':
+#           description: not found
+#         '500':
+#           description: server error
+#     patch:
+#       description: update a launch
+#       operationId: update-a-launch-id
+#       tags:
+#         - For a single launch
+#       responses:
+#         '200':
+#           description: launches updated
+#         '400':
+#           description: bad request
+#         '404':
+#           description: not found
+#         '500':
+#           description: server error
+#       requestBody:
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#               properties:
+#                  id:
+#                     type: integer
+#                   flightNumber:
+#                     type: integer
+#                   launchDate:
+#                     type: date
+#                   mission:
+#                     type: string
+#                   rocket:
+#                     type: string
+#                   upcoming:
+#                     type: boolean
+#                   customers:
+#                     type: array
+#                   success:
+#                     type: boolean
+#                   Destination:
+#                     type: string
+tags:
+  - name: launches
+  - name: For launches
+  - name: For a single launch
