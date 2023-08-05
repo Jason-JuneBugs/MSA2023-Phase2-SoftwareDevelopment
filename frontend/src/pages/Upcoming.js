@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo,useState } from "react";
 import { 
   withStyles,
   Appear,
@@ -24,7 +24,7 @@ const Upcoming = props => {
     classes,
     abortLaunch,
   } = props;
-
+  
   const tableBody = useMemo(() => {
     return launches?.filter((launch) => launch.upcoming)
       .map((launch) => {
@@ -36,8 +36,8 @@ const Upcoming = props => {
               </Link>
             </Clickable>
           </td>
-          {/* <td>{launch.flightNumber}</td> */}
           <td>{launch.id}</td>
+
           <td>{new Date(launch.launchdate).toDateString()}</td>
           <td>{launch.mission}</td>
           <td>{launch.rocket}</td>
@@ -45,12 +45,17 @@ const Upcoming = props => {
         </tr>;
       });
   }, [launches, abortLaunch, classes.link]);
+ 
+  
+   
+  
 
   return <Appear id="upcoming" animate show={entered}>
     <Paragraph>Upcoming missions including both SpaceX launches and newly scheduled Zero to Mastery rockets.</Paragraph>
     <Words animate>Warning! Clicking on the ✖ aborts the mission.</Words>
     <Table animate show={entered}>
-      <table style={{tableLayout: "fixed"}}>
+      <table style={{tableLayout: "auto"}}>
+      {/* <table style={{tableLayout: "fixed"}}> */}
         <thead>
           <tr>
             <th style={{width: "3rem"}}></th>
