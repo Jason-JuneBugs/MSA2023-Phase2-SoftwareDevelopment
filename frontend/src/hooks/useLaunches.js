@@ -8,12 +8,12 @@ import {
 } from './requests';
 
 function useLaunches(onSuccessSound, onAbortSound, onFailureSound) {
-  const [launches, saveLaunches] = useState([]);
+  const [launches, setLaunches] = useState([]);
   const [isPendingLaunch, setPendingLaunch] = useState(false);
 
   const getLaunches = useCallback(async () => {
     const fetchedLaunches = await httpGetLaunches();
-    saveLaunches(fetchedLaunches);
+    setLaunches(fetchedLaunches);
   }, []);
 
   useEffect(() => {

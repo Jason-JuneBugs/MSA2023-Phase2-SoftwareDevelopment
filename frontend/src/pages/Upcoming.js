@@ -28,19 +28,20 @@ const Upcoming = props => {
   const tableBody = useMemo(() => {
     return launches?.filter((launch) => launch.upcoming)
       .map((launch) => {
-        return <tr key={String(launch.flightNumber)}>
+        return <tr key={String(launch.id)}>
           <td>
             <Clickable style={{color:"red"}}>
-              <Link className={classes.link} onClick={() => abortLaunch(launch.flightNumber)}>
+              <Link className={classes.link} onClick={() => abortLaunch(launch.id)}>
                 ✖
               </Link>
             </Clickable>
           </td>
-          <td>{launch.flightNumber}</td>
-          <td>{new Date(launch.launchDate).toDateString()}</td>
+          {/* <td>{launch.flightNumber}</td> */}
+          <td>{launch.id}</td>
+          <td>{new Date(launch.launchdate).toDateString()}</td>
           <td>{launch.mission}</td>
           <td>{launch.rocket}</td>
-          <td>{launch.target}</td>
+          <td>{launch.destination}</td>
         </tr>;
       });
   }, [launches, abortLaunch, classes.link]);
@@ -53,11 +54,11 @@ const Upcoming = props => {
         <thead>
           <tr>
             <th style={{width: "3rem"}}></th>
-            <th style={{width: "3rem"}}>No.</th>
+            <th style={{width: "6rem"}}>FlightNo</th>
             <th style={{width: "10rem"}}>Date</th>
             <th style={{width: "11rem"}}>Mission</th>
             <th style={{width: "11rem"}}>Rocket</th>
-            <th>Destination</th>
+            <th style={{width: "11rem"}}>Destination</th>
           </tr>
         </thead>
         <tbody>
