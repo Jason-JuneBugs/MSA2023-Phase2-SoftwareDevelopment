@@ -9,6 +9,8 @@ info:
 servers:
   - url: 'http://localhost:5001/api'
     description: Development server
+  - url: 'https://nasa-mission-control-backend.onrender.com/'
+    description: Deployment server
 paths:
   /planets:
       get:

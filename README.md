@@ -5,7 +5,7 @@
 This is to simulate a NASA mission control board. The application will allow users to view, create, update and delete a collection of items. You have the creative freedom to decide what type of items your mission control app will "house":
 
 - planets
-- lauches
+- launches
 - all of the above or something else!
 
 ## Getting Started
