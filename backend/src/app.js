@@ -23,16 +23,13 @@ app.use("/api/planets", planetsRouter);
 app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // AWS Copilot requires a healthcheck endpoint. It calls this endpoint
-// every 2 minutes to check the server is still running. If this endpoint fails
-// the container will automatically be redeployed.
-// DO NOT REMOVE THIS ENDPOINT!
+
 app.get("/api/healthcheck", (req, res) => {
   res.json({ message: "OK!" });
 });
 
 app.get("/api/", (req, res) => {
-  // res.send('Hello NASA Pilots')
-  res.json({ message: "Hello NASA pilots" });
+  res.json({ message: "Hello NASA mission controller" });
 });
 
 module.exports = app;
